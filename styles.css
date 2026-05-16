@@ -1,1 +1,115 @@
+// Sistema Scout - JavaScript Completo
+
+class ScoutSystem {
+    constructor() {
+        this.players = JSON.parse(localStorage.getItem('scoutPlayers')) || [];
+        this.init();
+    }
+
+    init() {
+        this.bindEvents();
+        this.updatePlayersList();
+        this.updateStatistics();
+    }
+
+    bindEvents() {
+        // Navegação
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => this.navigate(e.target.id));
+        });
+
+        // Formulário
+        document.getElementById('playerForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            this.addPlayer();
+        });
+
+        // Busca
+        document.getElementById('searchInput')?.addEventListener('input', (e) => {
+            this.filterPlayers(e.target.value);
+        });
+
+        // Exportar
+        document.getElementById('exportBtn').addEventListener('click', () => {
+            this.exportData();
+        });
+    }
+
+    navigate(btnId) {
+        // Remover active de todos os botões e seções
+        document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.section').forEach(section => section.classList.remove('active'));
+
+        // Adicionar active no botão clicado
+        document.getElementById(btnId).classList.add('active');
+
+        // Mostrar seção correspondente
+        const sectionMap = {
+            'addPlayerBtn': 'addPlayer',
+            'playersListBtn': 'playersList',
+            'statisticsBtn': 'statistics',
+            'exportBtn': 'export'
+        };
+
+        const sectionId = sectionMap[btnId];
+        if (sectionId) {
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Atualizar dados quando necessário
+            if (sectionId === 'playersList') {
+                this.updatePlayersList();
+            } else if (sectionId === 'statistics') {
+                this.updateStatistics();
+            }
+        }
+    }
+
+    addPlayer() {
+        const formData = {
+            id: Date.now(),
+            name: document.getElementById('playerName').value,
+            age: parseInt(document.getElementById('playerAge').value),
+            position: document.getElementById('playerPosition').value,
+            club: document.getElementById('playerClub').value,
+            height: parseInt(document.getElementById('playerHeight').value),
+            weight: parseInt(document.getElementById('playerWeight').value),
+            preferredFoot: document.getElementById('preferredFoot').value,
+            skills: {
+                speed: parseInt(document.getElementById('speed').value),
+                technique: parseInt(document.getElementById('technique').value),
+                finishing: parseInt(document.getElementById('finishing').value),
+                passing: parseInt(document.getElementById('passing').value),
+                defense: parseInt(document.getElementById('defense').value),
+                physicality: parseInt(document.getElementById('physicality').value),
+                mentality: parseInt(document.getElementById('mentality').value),
+                positioning: parseInt(document.getElementById('positioning').value)
+            },
+            notes: document.getElementById('playerNotes').value,
+            dateAdded: new Date().toLocaleDateString('pt-BR')
+        };
+
+        // Calcular média geral
+        const skillsValues = Object.values(formData.skills);
+        formData.overallRating = Math.round(skillsValues.reduce((a, b) => a + b, 0) / skillsValues.length);
+
+        this.players.push(formData);
+        this.saveData();
+        this.clearForm();
+        
+        // Mostrar mensagem de sucesso
+        this.showNotification('Jogador adicionado com sucesso!', 'success');
+        
+        // Ir para lista de jogadores
+        this.navigate('playersListBtn');
+    }
+
+    clearForm() {
+        document.getElementById('playerForm').reset();
+    }
+
+    updatePlayersList() {
+        const container = document.getElementById('playersContainer');
+        if (!container) return;
+
+        if (this.players.length
 
