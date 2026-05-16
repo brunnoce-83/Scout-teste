@@ -2,767 +2,619 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="theme-color" content="#0a0e1a">
-<title>Scout System 2026</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scout System 2026 — Calendário de Cobertura</title>
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
   :root {
-    --bg: #0a0e1a;
-    --bg-2: #111726;
-    --bg-3: #1a2236;
-    --bg-4: #232d44;
-    --border: #2a3550;
-    --text: #e8edf7;
-    --text-dim: #8a96b3;
-    --accent: #ffd23f;
-    --accent-2: #ffb800;
-    --green: #22c55e;
-    --red: #ef4444;
-    --blue: #3b82f6;
-    --purple: #8b5cf6;
-    --radius: 10px;
-  }
-  html, body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-  body { padding-bottom: 90px; }
+    --bg: #f5f5f0;
+    --paper: #ffffff;
+    --ink: #1f1f1f;
+    --ink-dim: #6b6b6b;
+    --line: #d8d8d2;
+    --line-soft: #ececea;
+    --accent: #f5c842;
+    --accent-2: #e8b730;
+    --group-brasil: #94c47d;
+    --group-base:   #6ec1a8;
+    --group-sul:    #f3b97a;
+    --group-mundo:  #a89bd6;
+    --subhead-bg: #f0efe9;
 
-  /* ---------- Header ---------- */
-  header {
-    background: linear-gradient(180deg, #0c1426 0%, #0a0e1a 100%);
-    padding: 18px 16px 14px;
-    border-bottom: 1px solid var(--border);
+    --sc-brunno: #f4c542;
+    --sc-cristian: #6fb8d6;
+    --sc-gabriel: #82c08a;
+    --sc-humberto: #d68a8a;
+    --sc-base: #5fa2cf;
+    --sc-multi: #1f1f1f;
+    --sc-report: #f4c542;
+  }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
+    font-size: 13px;
+    min-height: 100vh;
+  }
+
+  /* Top toolbar */
+  .topbar {
+    background: var(--ink);
+    color: #fff;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
     position: sticky;
     top: 0;
     z-index: 50;
   }
-  .header-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: 800;
-    font-size: 18px;
-    letter-spacing: .5px;
-  }
-  .logo .icon {
-    width: 36px; height: 36px;
-    background: linear-gradient(135deg, var(--accent), var(--accent-2));
-    border-radius: 8px;
-    display: grid;
-    place-items: center;
-    color: #1a1a1a;
-    font-size: 20px;
-  }
-  .logo small {
-    display: block;
-    color: var(--text-dim);
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 1px;
-  }
-  .header-actions { display: flex; gap: 8px; }
-  .icon-btn {
-    width: 38px; height: 38px;
-    border-radius: 9px;
-    background: var(--bg-3);
-    border: 1px solid var(--border);
-    color: var(--text);
-    cursor: pointer;
-    display: grid;
-    place-items: center;
-    font-size: 16px;
-    transition: .15s;
-  }
-  .icon-btn:active { transform: scale(.94); background: var(--bg-4); }
-
-  /* ---------- Tabs ---------- */
-  nav.tabs {
-    position: fixed;
-    bottom: 0; left: 0; right: 0;
-    background: rgba(10, 14, 26, .96);
-    backdrop-filter: blur(12px);
-    border-top: 1px solid var(--border);
-    display: flex;
-    z-index: 40;
-    padding: 8px 4px calc(8px + env(safe-area-inset-bottom));
-  }
-  nav.tabs button {
-    flex: 1;
-    background: none;
-    border: none;
-    color: var(--text-dim);
-    padding: 10px 4px 8px;
-    font-size: 11px;
-    font-weight: 600;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    align-items: center;
-    cursor: pointer;
-    border-radius: 10px;
-    transition: .15s;
-  }
-  nav.tabs button .ico { font-size: 22px; line-height: 1; }
-  nav.tabs button.active { color: var(--accent); }
-  nav.tabs button.active .ico { transform: translateY(-2px); }
-
-  /* ---------- Main ---------- */
-  main {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 16px;
-  }
-  .view { display: none; animation: fade .25s ease; }
-  .view.active { display: block; }
-  @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-
-  .view-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 14px;
-  }
-  .view-head h1 {
-    font-size: 22px;
-    font-weight: 800;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .view-head h1 .count {
-    background: var(--bg-3);
-    color: var(--text-dim);
+  .topbar .tb-btn {
+    background: #2c2c2c;
+    color: #fff;
+    border: 1px solid #3a3a3a;
+    padding: 7px 14px;
+    border-radius: 6px;
     font-size: 12px;
-    font-weight: 700;
-    padding: 3px 9px;
-    border-radius: 20px;
-  }
-  .btn-primary {
-    background: linear-gradient(135deg, var(--accent), var(--accent-2));
-    color: #1a1a1a;
-    border: none;
-    padding: 10px 16px;
-    font-weight: 700;
-    font-size: 13px;
-    border-radius: 9px;
+    font-weight: 600;
     cursor: pointer;
-    transition: .15s;
     display: inline-flex;
     align-items: center;
     gap: 6px;
+    transition: .12s;
   }
-  .btn-primary:active { transform: scale(.96); }
-  .btn-secondary {
-    background: var(--bg-3);
-    color: var(--text);
-    border: 1px solid var(--border);
-    padding: 10px 16px;
-    border-radius: 9px;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 13px;
-  }
-  .btn-danger {
-    background: rgba(239,68,68,.12);
-    color: var(--red);
-    border: 1px solid rgba(239,68,68,.3);
-  }
-
-  /* ---------- Search ---------- */
-  .search-bar {
-    background: var(--bg-2);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 10px 14px;
-    margin-bottom: 14px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .search-bar input {
-    flex: 1;
-    background: none;
-    border: none;
-    color: var(--text);
-    font-size: 14px;
-    outline: none;
-  }
-  .search-bar input::placeholder { color: var(--text-dim); }
-
-  /* ---------- Cards ---------- */
-  .grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-  @media (min-width: 700px) { .grid { grid-template-columns: 1fr 1fr; } }
-  @media (min-width: 1000px) { .grid { grid-template-columns: 1fr 1fr 1fr; } }
-
-  .card {
-    background: var(--bg-2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 14px;
-    cursor: pointer;
-    transition: .15s;
-    position: relative;
-  }
-  .card:active { transform: scale(.98); }
-  .card:hover { border-color: var(--accent); }
-  .card-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 10px;
-  }
-  .card-title {
-    font-weight: 700;
-    font-size: 15px;
-    margin-bottom: 4px;
-  }
-  .card-sub {
-    color: var(--text-dim);
+  .topbar .tb-btn:hover { background: #3a3a3a; }
+  .topbar .tb-btn.active { background: #444; border-color: var(--accent); }
+  .topbar .tb-btn.shortlist { background: #5b3fa8; border-color: #5b3fa8; }
+  .topbar .tb-btn.indicados { background: #2d8f5b; border-color: #2d8f5b; }
+  .topbar .tb-btn.report   { background: #a83232; border-color: #a83232; }
+  .topbar .scout-chip {
+    padding: 7px 14px;
+    border-radius: 6px;
     font-size: 12px;
-    line-height: 1.5;
-  }
-  .card-actions {
-    display: flex;
-    gap: 4px;
-  }
-  .mini-btn {
-    width: 30px; height: 30px;
-    background: var(--bg-3);
-    border: 1px solid var(--border);
-    color: var(--text-dim);
-    border-radius: 7px;
-    cursor: pointer;
-    font-size: 13px;
-  }
-  .mini-btn:hover { color: var(--text); border-color: var(--accent); }
-  .mini-btn.del:hover { color: var(--red); border-color: var(--red); }
-
-  .badge {
-    display: inline-block;
-    font-size: 10px;
     font-weight: 700;
-    padding: 3px 7px;
-    border-radius: 4px;
-    text-transform: uppercase;
-    letter-spacing: .5px;
-    margin-top: 6px;
+    color: #1f1f1f;
+    border: 2px solid transparent;
+    cursor: pointer;
+    user-select: none;
+    transition: .12s;
   }
-  .badge-yellow { background: rgba(255,210,63,.15); color: var(--accent); }
-  .badge-green { background: rgba(34,197,94,.15); color: var(--green); }
-  .badge-blue { background: rgba(59,130,246,.15); color: var(--blue); }
-  .badge-purple { background: rgba(139,92,246,.15); color: var(--purple); }
+  .topbar .scout-chip.muted { opacity: .35; }
+  .topbar .scout-chip:hover { transform: translateY(-1px); }
+  .topbar .spacer { flex: 1; }
 
-  .empty {
-    text-align: center;
-    padding: 60px 20px;
-    color: var(--text-dim);
-  }
-  .empty .ico { font-size: 60px; margin-bottom: 12px; opacity: .4; }
-  .empty p { font-size: 14px; }
-
-  /* ---------- Modal ---------- */
-  .modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,.6);
-    backdrop-filter: blur(6px);
-    display: none;
-    align-items: flex-end;
-    justify-content: center;
-    z-index: 100;
-    padding: 0;
-  }
-  .modal-overlay.open { display: flex; }
-  .modal {
-    background: var(--bg-2);
-    width: 100%;
-    max-width: 600px;
-    max-height: 92vh;
-    border-radius: 16px 16px 0 0;
-    overflow-y: auto;
-    animation: slideUp .25s ease;
-    border: 1px solid var(--border);
-    border-bottom: none;
-  }
-  @media (min-width: 700px) {
-    .modal-overlay { align-items: center; padding: 20px; }
-    .modal { border-radius: 16px; border-bottom: 1px solid var(--border); }
-  }
-  @keyframes slideUp { from { transform: translateY(100%); } to { transform: none; } }
-  .modal-head {
-    padding: 18px 18px 14px;
+  /* Page header */
+  .page-head {
+    padding: 18px 16px 10px;
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
     align-items: center;
-    border-bottom: 1px solid var(--border);
+    gap: 14px;
+  }
+  .page-head h1 {
+    font-size: 22px;
+    font-weight: 800;
+    margin-right: auto;
+  }
+  .page-head .hint {
+    font-size: 12px;
+    color: var(--ink-dim);
+    display: block;
+    width: 100%;
+    margin-top: 4px;
+  }
+  .btn-add-comp {
+    background: var(--accent);
+    color: #1f1f1f;
+    border: 1px solid var(--accent-2);
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  .btn-add-comp:hover { background: var(--accent-2); }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 11px;
+    color: var(--ink-dim);
+    padding: 0 16px 12px;
+  }
+  .legend .item { display: inline-flex; align-items: center; gap: 5px; }
+  .legend .sw {
+    display: inline-block;
+    width: 14px; height: 14px;
+    border-radius: 3px;
+    border: 1px solid rgba(0,0,0,.1);
+  }
+  .legend .auto { color: var(--ink-dim); font-style: italic; margin-left: auto; }
+
+  /* Gantt table */
+  .gantt-wrap {
+    margin: 0 16px 20px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: auto;
+    max-height: calc(100vh - 220px);
+  }
+  table.gantt {
+    border-collapse: collapse;
+    width: max-content;
+    min-width: 100%;
+    font-size: 12px;
+  }
+  table.gantt th, table.gantt td {
+    border-right: 1px solid var(--line-soft);
+    border-bottom: 1px solid var(--line-soft);
+    padding: 6px 8px;
+    vertical-align: middle;
+    background: var(--paper);
+  }
+  table.gantt thead th {
     position: sticky;
     top: 0;
-    background: var(--bg-2);
-    z-index: 2;
-  }
-  .modal-head h2 {
-    font-size: 17px;
+    background: #fafaf6;
+    z-index: 10;
     font-weight: 700;
+    color: var(--ink-dim);
+    text-align: center;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .4px;
+  }
+  table.gantt thead th.col-name { text-align: left; padding-left: 12px; }
+  table.gantt thead tr.periods th {
+    font-size: 9px;
+    color: #a0a0a0;
+    text-transform: none;
+    padding: 1px 0 6px;
+    font-weight: 600;
+  }
+  .freeze { position: sticky; left: 0; background: var(--paper); z-index: 5; }
+  thead th.freeze { z-index: 15; background: #fafaf6; }
+
+  tr.group-row td {
+    background: var(--group-brasil);
+    color: #1a3320;
+    font-weight: 800;
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+  tr.group-row.g-base td { background: var(--group-base); }
+  tr.group-row.g-sul td  { background: var(--group-sul); }
+  tr.group-row.g-mundo td{ background: var(--group-mundo); }
+
+  tr.subgroup-row td {
+    background: var(--subhead-bg);
+    font-weight: 700;
+    font-size: 11px;
+    color: #4a4a4a;
+    padding: 4px 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  tr.comp-row td.col-name {
+    font-weight: 600;
+    color: var(--ink);
+    padding-left: 14px;
+    min-width: 220px;
+    max-width: 240px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+  }
+  tr.comp-row td.col-name:hover { background: #fffdf3; }
+  tr.comp-row td.col-report {
+    text-align: center;
+    width: 36px;
+    cursor: pointer;
+    font-size: 14px;
+    opacity: .55;
+  }
+  tr.comp-row td.col-report:hover { opacity: 1; background: #fff8dc; }
+  tr.comp-row td.col-report.has-report { color: var(--sc-report); opacity: 1; font-weight: 700; }
+
+  td.col-date input {
+    border: 1px solid var(--line);
+    background: var(--paper);
+    padding: 4px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-family: inherit;
+    width: 110px;
+    color: var(--ink);
+  }
+  td.col-scout select {
+    border: 1px solid var(--line);
+    background: var(--paper);
+    padding: 4px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-family: inherit;
+    min-width: 100px;
+    max-width: 120px;
+    color: var(--ink);
+  }
+
+  td.period {
+    padding: 0;
+    width: 28px;
+    min-width: 28px;
+    max-width: 28px;
+    height: 32px;
+    text-align: center;
+    border-right: 1px solid var(--line-soft);
+  }
+  td.period.month-end { border-right: 1px solid var(--line); }
+  td.period.in-range {
+    font-size: 10px;
+    font-weight: 800;
+    color: #1f1f1f;
+    letter-spacing: -.3px;
+  }
+  td.period.in-range.multi { color: #fff; }
+  td.period.in-range.empty { color: rgba(0,0,0,.25); }
+
+  /* Modal */
+  .modal-bg {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    padding: 16px;
+  }
+  .modal-bg.open { display: flex; }
+  .modal {
+    background: var(--paper);
+    width: 100%;
+    max-width: 640px;
+    max-height: 92vh;
+    border-radius: 10px;
+    overflow-y: auto;
+    border: 1px solid var(--line);
+    box-shadow: 0 20px 50px rgba(0,0,0,.3);
+  }
+  .modal-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--line);
+    background: #fafaf6;
+    border-radius: 10px 10px 0 0;
+    position: sticky; top: 0; z-index: 2;
+  }
+  .modal-head h2 { font-size: 16px; font-weight: 800; }
+  .modal-head .x {
+    width: 32px; height: 32px;
+    background: none;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
   }
   .modal-body { padding: 18px; }
   .modal-foot {
-    padding: 14px 18px;
-    border-top: 1px solid var(--border);
+    padding: 12px 18px;
+    border-top: 1px solid var(--line);
     display: flex;
     gap: 10px;
     justify-content: flex-end;
-    position: sticky;
-    bottom: 0;
-    background: var(--bg-2);
+    position: sticky; bottom: 0; background: #fafaf6;
   }
-
-  /* ---------- Forms ---------- */
-  .field { margin-bottom: 14px; }
+  .field { margin-bottom: 12px; }
   .field label {
     display: block;
     font-size: 11px;
     font-weight: 700;
-    color: var(--text-dim);
-    margin-bottom: 6px;
-    letter-spacing: .8px;
+    color: var(--ink-dim);
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: .6px;
   }
-  .field label .req { color: var(--accent); }
   .field input, .field select, .field textarea {
     width: 100%;
-    background: var(--bg);
-    border: 1px solid var(--border);
-    color: var(--text);
-    padding: 11px 12px;
-    border-radius: 8px;
-    font-size: 14px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    padding: 9px 10px;
+    border-radius: 5px;
     font-family: inherit;
-    outline: none;
-    transition: .15s;
-  }
-  .field input:focus, .field select:focus, .field textarea:focus {
-    border-color: var(--accent);
-    background: var(--bg-3);
-  }
-  .field textarea { resize: vertical; min-height: 80px; }
-  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  @media (max-width: 500px) { .field-row { grid-template-columns: 1fr; } }
-
-  /* ---------- Player Report (full screen) ---------- */
-  .report-form .section-title {
     font-size: 13px;
-    font-weight: 700;
-    color: var(--accent);
-    margin: 18px 0 10px;
-    padding-bottom: 6px;
-    border-bottom: 1px solid var(--border);
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    outline: none;
   }
+  .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--accent); }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  @media (max-width: 500px) { .field-row { grid-template-columns: 1fr; } }
+  textarea { resize: vertical; min-height: 70px; }
+
+  .btn {
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .btn:hover { background: #f0efe9; }
+  .btn-primary {
+    background: var(--accent);
+    border-color: var(--accent-2);
+    color: #1f1f1f;
+    font-weight: 800;
+  }
+  .btn-primary:hover { background: var(--accent-2); }
+  .btn-danger { color: #a83232; border-color: #d6a0a0; }
+  .btn-danger:hover { background: #fbe9e9; }
+
+  .stars { display: inline-flex; gap: 2px; }
+  .star { cursor: pointer; font-size: 20px; color: #d8d8d2; user-select: none; }
+  .star.on { color: var(--accent); }
   .rating-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: var(--bg);
-    border: 1px solid var(--border);
-    padding: 10px 12px;
-    border-radius: 8px;
-    margin-bottom: 8px;
-  }
-  .rating-row span { font-size: 13px; font-weight: 600; }
-  .stars { display: flex; gap: 2px; }
-  .star {
-    cursor: pointer;
-    font-size: 22px;
-    color: #2a3550;
-    transition: .1s;
-    user-select: none;
-  }
-  .star.on { color: var(--accent); }
-  .star:hover { transform: scale(1.15); }
-
-  /* Detail view */
-  .detail-section { margin-bottom: 20px; }
-  .detail-section h3 {
+    padding: 7px 10px;
+    border: 1px solid var(--line-soft);
+    border-radius: 5px;
+    margin-bottom: 5px;
     font-size: 12px;
-    font-weight: 700;
-    color: var(--accent);
-    margin-bottom: 10px;
+  }
+  .sec-title {
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--ink-dim);
+    margin: 14px 0 8px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--line);
     text-transform: uppercase;
     letter-spacing: 1px;
   }
-  .detail-item {
+
+  .list-view { padding: 0 16px 30px; display: none; }
+  .list-view.active { display: block; }
+  .list-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
     display: flex;
     justify-content: space-between;
-    padding: 8px 0;
-    border-bottom: 1px solid var(--border);
-    font-size: 13px;
+    align-items: center;
+    cursor: pointer;
   }
-  .detail-item:last-child { border-bottom: none; }
-  .detail-item .k { color: var(--text-dim); }
-  .detail-item .v { font-weight: 600; text-align: right; }
+  .list-card:hover { border-color: var(--accent); background: #fffdf3; }
+  .list-card .title { font-weight: 700; font-size: 14px; }
+  .list-card .sub { font-size: 11px; color: var(--ink-dim); margin-top: 3px; }
 
-  /* Toast */
   .toast {
     position: fixed;
-    top: 80px;
-    left: 50%;
-    transform: translateX(-50%) translateY(-100px);
-    background: var(--bg-3);
-    border: 1px solid var(--accent);
-    color: var(--text);
+    bottom: 20px; left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--ink);
+    color: #fff;
     padding: 10px 18px;
-    border-radius: 24px;
-    font-size: 13px;
+    border-radius: 22px;
+    font-size: 12px;
     font-weight: 600;
     z-index: 200;
-    transition: .3s;
-    box-shadow: 0 8px 24px rgba(0,0,0,.4);
+    transition: .25s;
   }
   .toast.show { transform: translateX(-50%) translateY(0); }
 
-  /* Menu dropdown */
-  .menu {
-    position: absolute;
-    top: 50px;
-    right: 16px;
-    background: var(--bg-3);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 6px;
-    display: none;
-    min-width: 200px;
-    z-index: 60;
-    box-shadow: 0 12px 28px rgba(0,0,0,.5);
+  @media (max-width: 700px) {
+    .topbar { padding: 8px 10px; }
+    .topbar .tb-btn { padding: 6px 10px; font-size: 11px; }
+    .topbar .scout-chip { padding: 6px 10px; font-size: 11px; }
+    .page-head h1 { font-size: 18px; }
+    .gantt-wrap { margin: 0 8px 16px; }
   }
-  .menu.open { display: block; }
-  .menu button {
-    width: 100%;
-    background: none;
-    border: none;
-    color: var(--text);
-    padding: 10px 12px;
-    text-align: left;
-    font-size: 13px;
-    border-radius: 7px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .menu button:hover { background: var(--bg-4); }
-
-  .stat-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    margin-bottom: 16px;
-  }
-  .stat-box {
-    background: var(--bg-2);
-    border: 1px solid var(--border);
-    padding: 12px 8px;
-    border-radius: 10px;
-    text-align: center;
-  }
-  .stat-box .n { font-size: 22px; font-weight: 800; color: var(--accent); }
-  .stat-box .l { font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="header-inner">
-    <div class="logo">
-      <div class="icon">🦅</div>
-      <div>
-        SCOUT SYSTEM
-        <small>EAGLE FOOTBALL · 2026</small>
-      </div>
-    </div>
-    <div class="header-actions">
-      <button class="icon-btn" id="btn-menu" title="Menu">⋮</button>
-    </div>
+<div class="topbar">
+  <button class="tb-btn active" data-view="calendar">📅 Calendar</button>
+  <button class="tb-btn shortlist" data-view="shortlist">⭐ Shortlist</button>
+  <button class="tb-btn indicados" data-view="indicados">📌 Indicados</button>
+  <span id="scout-chips" style="display:inline-flex;gap:6px;flex-wrap:wrap"></span>
+  <span class="spacer"></span>
+  <button class="tb-btn report" onclick="openReportModal()">📋 Player Report</button>
+  <button class="tb-btn" onclick="exportData()">⬇ Export</button>
+  <button class="tb-btn" onclick="document.getElementById('import-file').click()">⬆ Import</button>
+  <input type="file" id="import-file" accept="application/json" style="display:none" onchange="importData(event)">
+</div>
+
+<div id="view-calendar">
+  <div class="page-head">
+    <h1>Calendário de Cobertura <span id="year-label">2026</span></h1>
+    <button class="btn" onclick="changeYear(-1)" title="Ano anterior">←</button>
+    <button class="btn" onclick="changeYear(1)" title="Próximo ano">→</button>
+    <button class="btn-add-comp" onclick="openCompModal()">+ Competição</button>
+    <span class="hint">Clique em <strong>📋</strong> ao lado de qualquer campeonato para adicionar relatórios de jogadores</span>
   </div>
-  <div class="menu" id="menu">
-    <button onclick="exportData()">💾 Exportar dados</button>
-    <button onclick="document.getElementById('import-file').click()">📥 Importar dados</button>
-    <button onclick="clearAll()">🗑️ Limpar tudo</button>
-    <input type="file" id="import-file" accept="application/json" style="display:none" onchange="importData(event)">
+
+  <div class="legend">
+    <span class="item"><span class="sw" style="background:var(--sc-brunno)"></span>Brunno</span>
+    <span class="item"><span class="sw" style="background:var(--sc-cristian)"></span>Cristian</span>
+    <span class="item"><span class="sw" style="background:var(--sc-gabriel)"></span>Gabriel</span>
+    <span class="item"><span class="sw" style="background:var(--sc-humberto)"></span>Humberto</span>
+    <span class="item"><span class="sw" style="background:var(--sc-base)"></span>Base</span>
+    <span class="item"><span class="sw" style="background:var(--sc-multi)"></span>2+ scouts</span>
+    <span class="item"><span class="sw" style="background:var(--sc-report);border:1px solid #c6a830"></span>Com relatório</span>
+    <span class="auto" id="autosave-status">Auto-salvo</span>
   </div>
-</header>
 
-<main>
-  <!-- DASHBOARD -->
-  <section class="view active" id="view-home">
-    <div class="view-head"><h1>📊 Painel</h1></div>
-    <div class="stat-grid">
-      <div class="stat-box"><div class="n" id="stat-players">0</div><div class="l">Jogadores</div></div>
-      <div class="stat-box"><div class="n" id="stat-reports">0</div><div class="l">Relatórios</div></div>
-      <div class="stat-box"><div class="n" id="stat-comps">0</div><div class="l">Competições</div></div>
-    </div>
-    <h2 style="font-size:14px;color:var(--text-dim);margin:18px 0 10px;text-transform:uppercase;letter-spacing:1px;">Últimos relatórios</h2>
-    <div id="home-recent"></div>
-  </section>
+  <div class="gantt-wrap" id="gantt-wrap">
+    <table class="gantt" id="gantt-table"></table>
+  </div>
+</div>
 
-  <!-- PLAYERS -->
-  <section class="view" id="view-players">
-    <div class="view-head">
-      <h1>👤 Jogadores <span class="count" id="count-players">0</span></h1>
-      <button class="btn-primary" onclick="openPlayerModal()">+ Adicionar</button>
-    </div>
-    <div class="search-bar">
-      <span>🔍</span>
-      <input type="text" id="search-players" placeholder="Buscar jogador..." oninput="renderPlayers()">
-    </div>
-    <div class="grid" id="players-list"></div>
-  </section>
+<div class="list-view" id="view-shortlist">
+  <div class="page-head"><h1>⭐ Shortlist</h1><button class="btn-add-comp" onclick="openPlayerPicker('shortlist')">+ Adicionar jogador</button></div>
+  <div id="shortlist-list"></div>
+</div>
 
-  <!-- REPORTS -->
-  <section class="view" id="view-reports">
-    <div class="view-head">
-      <h1>📋 Relatórios <span class="count" id="count-reports">0</span></h1>
-      <button class="btn-primary" onclick="openReportModal()">+ Novo</button>
-    </div>
-    <div class="search-bar">
-      <span>🔍</span>
-      <input type="text" id="search-reports" placeholder="Buscar relatório..." oninput="renderReports()">
-    </div>
-    <div class="grid" id="reports-list"></div>
-  </section>
+<div class="list-view" id="view-indicados">
+  <div class="page-head"><h1>📌 Indicados</h1><button class="btn-add-comp" onclick="openPlayerPicker('indicados')">+ Adicionar jogador</button></div>
+  <div id="indicados-list"></div>
+</div>
 
-  <!-- COMPETITIONS -->
-  <section class="view" id="view-comps">
-    <div class="view-head">
-      <h1>🏆 Competições <span class="count" id="count-comps">0</span></h1>
-      <button class="btn-primary" onclick="openCompModal()">+ Adicionar</button>
-    </div>
-    <div class="search-bar">
-      <span>🔍</span>
-      <input type="text" id="search-comps" placeholder="Buscar competição..." oninput="renderComps()">
-    </div>
-    <div class="grid" id="comps-list"></div>
-  </section>
-</main>
-
-<nav class="tabs">
-  <button data-tab="home" class="active"><span class="ico">🏠</span>Início</button>
-  <button data-tab="players"><span class="ico">👤</span>Jogadores</button>
-  <button data-tab="reports"><span class="ico">📋</span>Relatórios</button>
-  <button data-tab="comps"><span class="ico">🏆</span>Competições</button>
-</nav>
-
-<!-- =================== MODAL: PLAYER =================== -->
-<div class="modal-overlay" id="modal-player">
+<!-- Modal: Competition -->
+<div class="modal-bg" id="modal-comp">
   <div class="modal">
     <div class="modal-head">
-      <h2 id="player-modal-title">+ Novo Jogador</h2>
-      <button class="icon-btn" onclick="closeModal('modal-player')">✕</button>
+      <h2 id="comp-title">+ Nova Competição</h2>
+      <button class="x" onclick="closeModal('modal-comp')">✕</button>
     </div>
     <div class="modal-body">
-      <form id="form-player">
-        <input type="hidden" id="player-id">
-        <div class="field"><label>Nome <span class="req">*</span></label><input type="text" id="p-name" required></div>
-        <div class="field-row">
-          <div class="field"><label>Data de Nascimento</label><input type="date" id="p-birth"></div>
-          <div class="field"><label>Nacionalidade</label><input type="text" id="p-nationality"></div>
-        </div>
+      <form id="form-comp">
+        <input type="hidden" id="c-id">
+        <div class="field"><label>Nome *</label><input type="text" id="c-name" required></div>
         <div class="field-row">
           <div class="field">
-            <label>Posição</label>
-            <select id="p-position">
-              <option value="">-</option>
-              <option>Goleiro (GOL)</option>
-              <option>Lateral Direito (LD)</option>
-              <option>Lateral Esquerdo (LE)</option>
-              <option>Zagueiro (ZAG)</option>
-              <option>Volante (VOL)</option>
-              <option>Meio-Campista (MC)</option>
-              <option>Meia Ofensivo (MOF)</option>
-              <option>Ponta Direita (PD)</option>
-              <option>Ponta Esquerda (PE)</option>
-              <option>Segundo Atacante (SA)</option>
-              <option>Centroavante (CA)</option>
+            <label>Grupo</label>
+            <select id="c-group">
+              <option value="brasil">Brasil</option>
+              <option value="brasil-base">Brasil — Base</option>
+              <option value="sul-pro">América do Sul Pro</option>
+              <option value="sul-base">América do Sul Base</option>
+              <option value="mundo">Américas / Mundo</option>
+              <option value="outro">Outro</option>
             </select>
           </div>
           <div class="field">
-            <label>Pé Preferido</label>
-            <select id="p-foot">
-              <option value="">-</option>
-              <option>Direito</option>
-              <option>Esquerdo</option>
-              <option>Ambidestro</option>
+            <label>Subgrupo</label>
+            <select id="c-subgroup">
+              <option value="profissional">Profissional</option>
+              <option value="sub-base">Sub / Base</option>
             </select>
           </div>
         </div>
         <div class="field-row">
-          <div class="field"><label>Altura (cm)</label><input type="number" id="p-height" min="100" max="230"></div>
-          <div class="field"><label>Peso (kg)</label><input type="number" id="p-weight" min="30" max="150"></div>
+          <div class="field"><label>Início *</label><input type="date" id="c-start" required></div>
+          <div class="field"><label>Fim *</label><input type="date" id="c-end" required></div>
         </div>
-        <div class="field"><label>Clube Atual</label><input type="text" id="p-club"></div>
-        <div class="field"><label>Empresário / Agente</label><input type="text" id="p-agent"></div>
-        <div class="field"><label>Observações</label><textarea id="p-notes" rows="3"></textarea></div>
+        <div class="field"><label>País</label><input type="text" id="c-country" value="Brasil"></div>
       </form>
     </div>
     <div class="modal-foot">
-      <button class="btn-secondary" onclick="closeModal('modal-player')">Cancelar</button>
-      <button class="btn-primary" onclick="savePlayer()">Salvar</button>
+      <button class="btn btn-danger" id="comp-del-btn" style="margin-right:auto;display:none" onclick="deleteComp()">🗑 Excluir</button>
+      <button class="btn" onclick="closeModal('modal-comp')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveComp()">Salvar</button>
     </div>
   </div>
 </div>
 
-<!-- =================== MODAL: REPORT =================== -->
-<div class="modal-overlay" id="modal-report">
+<!-- Modal: Player Report -->
+<div class="modal-bg" id="modal-report">
   <div class="modal">
     <div class="modal-head">
-      <h2 id="report-modal-title">📄 Novo Player Report</h2>
-      <button class="icon-btn" onclick="closeModal('modal-report')">✕</button>
+      <h2 id="report-title">📋 Novo Player Report</h2>
+      <button class="x" onclick="closeModal('modal-report')">✕</button>
     </div>
-    <div class="modal-body report-form">
+    <div class="modal-body">
       <form id="form-report">
-        <input type="hidden" id="report-id">
+        <input type="hidden" id="r-id">
 
-        <div class="section-title">Identificação</div>
-        <div class="field">
-          <label>Jogador <span class="req">*</span></label>
-          <select id="r-player" required></select>
-        </div>
+        <div class="sec-title">Identificação</div>
+        <div class="field"><label>Nome do jogador *</label><input type="text" id="r-pname" required></div>
         <div class="field-row">
-          <div class="field"><label>Data da observação</label><input type="date" id="r-date"></div>
-          <div class="field"><label>Competição</label><select id="r-comp"></select></div>
-        </div>
-        <div class="field-row">
-          <div class="field"><label>Adversário</label><input type="text" id="r-opponent"></div>
-          <div class="field">
-            <label>Tipo de observação</label>
-            <select id="r-type">
-              <option>Ao vivo</option>
-              <option>Vídeo</option>
-              <option>Treino</option>
+          <div class="field"><label>Posição</label>
+            <select id="r-pos">
+              <option value="">—</option>
+              <option>Goleiro</option><option>Lateral Direito</option><option>Lateral Esquerdo</option>
+              <option>Zagueiro</option><option>Volante</option><option>Meio-Campista</option>
+              <option>Meia Ofensivo</option><option>Ponta Direita</option><option>Ponta Esquerda</option>
+              <option>Segundo Atacante</option><option>Centroavante</option>
             </select>
           </div>
+          <div class="field"><label>Idade</label><input type="number" id="r-age" min="14" max="50"></div>
         </div>
-        <div class="field"><label>Observador (scout)</label><input type="text" id="r-scout"></div>
+        <div class="field-row">
+          <div class="field"><label>Clube atual</label><input type="text" id="r-club"></div>
+          <div class="field"><label>Pé preferido</label>
+            <select id="r-foot"><option value="">—</option><option>Direito</option><option>Esquerdo</option><option>Ambidestro</option></select>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field"><label>Competição</label><select id="r-comp"></select></div>
+          <div class="field"><label>Data da observação</label><input type="date" id="r-date"></div>
+        </div>
+        <div class="field-row">
+          <div class="field"><label>Adversário / Jogo</label><input type="text" id="r-opp"></div>
+          <div class="field"><label>Scout responsável</label><select id="r-scout"></select></div>
+        </div>
 
-        <div class="section-title">Avaliação Técnica</div>
-        <div id="ratings-technical"></div>
+        <div class="sec-title">Avaliação técnica</div>
+        <div id="ratings-tec"></div>
+        <div class="sec-title">Avaliação física</div>
+        <div id="ratings-fis"></div>
+        <div class="sec-title">Avaliação mental / tática</div>
+        <div id="ratings-men"></div>
 
-        <div class="section-title">Avaliação Física</div>
-        <div id="ratings-physical"></div>
-
-        <div class="section-title">Avaliação Mental / Tática</div>
-        <div id="ratings-mental"></div>
-
-        <div class="section-title">Parecer</div>
-        <div class="field">
-          <label>Recomendação</label>
-          <select id="r-recommend">
+        <div class="sec-title">Parecer</div>
+        <div class="field"><label>Recomendação</label>
+          <select id="r-reco">
             <option>Acompanhar</option>
             <option>Considerar contratação</option>
             <option>Contratar com prioridade</option>
             <option>Descartar</option>
           </select>
         </div>
-        <div class="field"><label>Pontos fortes</label><textarea id="r-strengths" rows="3"></textarea></div>
-        <div class="field"><label>Pontos a melhorar</label><textarea id="r-weak" rows="3"></textarea></div>
-        <div class="field"><label>Observações gerais</label><textarea id="r-notes" rows="3"></textarea></div>
+        <div class="field"><label>Pontos fortes</label><textarea id="r-strong"></textarea></div>
+        <div class="field"><label>Pontos a melhorar</label><textarea id="r-weak"></textarea></div>
+        <div class="field"><label>Observações gerais</label><textarea id="r-notes"></textarea></div>
+        <div class="field-row">
+          <div class="field"><label><input type="checkbox" id="r-shortlist" style="width:auto;margin-right:6px">Adicionar ao Shortlist</label></div>
+          <div class="field"><label><input type="checkbox" id="r-indicados" style="width:auto;margin-right:6px">Adicionar aos Indicados</label></div>
+        </div>
       </form>
     </div>
     <div class="modal-foot">
-      <button class="btn-secondary" onclick="closeModal('modal-report')">Cancelar</button>
-      <button class="btn-primary" onclick="saveReport()">Salvar Relatório</button>
+      <button class="btn btn-danger" id="report-del-btn" style="margin-right:auto;display:none" onclick="deleteReport()">🗑 Excluir</button>
+      <button class="btn" onclick="closeModal('modal-report')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveReport()">Salvar relatório</button>
     </div>
   </div>
 </div>
 
-<!-- =================== MODAL: REPORT VIEW =================== -->
-<div class="modal-overlay" id="modal-report-view">
+<!-- Modal: Reports list per competition -->
+<div class="modal-bg" id="modal-reports-comp">
   <div class="modal">
     <div class="modal-head">
-      <h2>📄 Relatório</h2>
-      <button class="icon-btn" onclick="closeModal('modal-report-view')">✕</button>
-    </div>
-    <div class="modal-body" id="report-view-body"></div>
-    <div class="modal-foot">
-      <button class="btn-secondary" onclick="closeModal('modal-report-view')">Fechar</button>
-      <button class="btn-primary" id="report-edit-btn">✎ Editar</button>
-    </div>
-  </div>
-</div>
-
-<!-- =================== MODAL: COMPETITION =================== -->
-<div class="modal-overlay" id="modal-comp">
-  <div class="modal">
-    <div class="modal-head">
-      <h2 id="comp-modal-title">+ Nova Competição</h2>
-      <button class="icon-btn" onclick="closeModal('modal-comp')">✕</button>
+      <h2 id="rc-title">📋 Relatórios</h2>
+      <button class="x" onclick="closeModal('modal-reports-comp')">✕</button>
     </div>
     <div class="modal-body">
-      <form id="form-comp">
-        <input type="hidden" id="comp-id">
-        <div class="field"><label>Nome <span class="req">*</span></label><input type="text" id="c-name" required></div>
-        <div class="field">
-          <label>Grupo</label>
-          <select id="c-group">
-            <option>BRASIL</option>
-            <option>BRASIL BASE</option>
-            <option>AMÉRICA DO SUL PRO</option>
-            <option>AMÉRICA DO SUL BASE</option>
-            <option>AMÉRICAS MUNDO</option>
-            <option>EUROPA</option>
-            <option>OUTRO</option>
-          </select>
-        </div>
-        <div class="field"><label>Subgrupo</label><input type="text" id="c-subgroup" placeholder="ex: Série A, U-20..."></div>
-        <div class="field-row">
-          <div class="field"><label>Início <span class="req">*</span></label><input type="date" id="c-start"></div>
-          <div class="field"><label>Fim <span class="req">*</span></label><input type="date" id="c-end"></div>
-        </div>
-        <div class="field-row">
-          <div class="field"><label>País</label><input type="text" id="c-country"></div>
-          <div class="field">
-            <label>Nível</label>
-            <select id="c-level">
-              <option>Profissional</option>
-              <option>Base</option>
-            </select>
-          </div>
-        </div>
-      </form>
-    </div>
-    <div class="modal-foot">
-      <button class="btn-secondary" onclick="closeModal('modal-comp')">Cancelar</button>
-      <button class="btn-primary" onclick="saveComp()">Adicionar</button>
+      <div id="rc-list"></div>
+      <button class="btn btn-primary" style="width:100%;margin-top:10px" id="rc-add">+ Novo relatório nesta competição</button>
     </div>
   </div>
 </div>
 
-<!-- =================== MODAL: PLAYER VIEW =================== -->
-<div class="modal-overlay" id="modal-player-view">
+<!-- Modal: Player picker -->
+<div class="modal-bg" id="modal-picker">
   <div class="modal">
     <div class="modal-head">
-      <h2>👤 Detalhes do Jogador</h2>
-      <button class="icon-btn" onclick="closeModal('modal-player-view')">✕</button>
+      <h2 id="pk-title">Selecionar jogador</h2>
+      <button class="x" onclick="closeModal('modal-picker')">✕</button>
     </div>
-    <div class="modal-body" id="player-view-body"></div>
-    <div class="modal-foot">
-      <button class="btn-secondary" onclick="closeModal('modal-player-view')">Fechar</button>
-      <button class="btn-primary" id="player-edit-btn">✎ Editar</button>
+    <div class="modal-body">
+      <input type="text" id="pk-search" placeholder="Buscar jogador..." style="width:100%;padding:9px;border:1px solid var(--line);border-radius:5px;margin-bottom:12px">
+      <div id="pk-list"></div>
     </div>
   </div>
 </div>
@@ -770,613 +622,655 @@
 <div class="toast" id="toast"></div>
 
 <script>
-/* =================== STATE =================== */
-const STORE = {
-  players: 'scoutsys.players',
-  reports: 'scoutsys.reports',
-  comps:   'scoutsys.comps'
-};
-const load = k => { try { return JSON.parse(localStorage.getItem(STORE[k]) || '[]'); } catch { return []; } };
-const save = (k, v) => localStorage.setItem(STORE[k], JSON.stringify(v));
-const uid  = () => Date.now().toString(36) + Math.random().toString(36).slice(2,7);
+const SCOUTS_DEFAULT = [
+  { id: 'brunno',   name: 'Brunno',   color: 'var(--sc-brunno)',   initial: 'B' },
+  { id: 'cristian', name: 'Cristian', color: 'var(--sc-cristian)', initial: 'C' },
+  { id: 'gabriel',  name: 'Gabriel',  color: 'var(--sc-gabriel)',  initial: 'G' },
+  { id: 'humberto', name: 'Humberto', color: 'var(--sc-humberto)', initial: 'H' },
+  { id: 'base',     name: 'Base',     color: 'var(--sc-base)',     initial: 'X' }
+];
+const MONTHS = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+const PERIOD_LABELS = ['1','11','21'];
+const TOTAL_PERIODS = 36;
+const GROUPS = [
+  { id: 'brasil',      label: 'Brasil',                cls: '' },
+  { id: 'brasil-base', label: 'Brasil — Base',         cls: 'g-base' },
+  { id: 'sul-pro',     label: 'América do Sul Pro',    cls: 'g-sul' },
+  { id: 'sul-base',    label: 'América do Sul Base',   cls: 'g-sul' },
+  { id: 'mundo',       label: 'Américas / Mundo',      cls: 'g-mundo' },
+  { id: 'outro',       label: 'Outro',                 cls: '' }
+];
+const SUBGROUPS = { 'profissional':'Profissional', 'sub-base':'Sub / Base' };
+const RATING_TEC = ['Passe','Drible','Finalização','Cabeceio','Cruzamento','Domínio','Controle de bola'];
+const RATING_FIS = ['Velocidade','Aceleração','Resistência','Força','Salto'];
+const RATING_MEN = ['Visão de jogo','Inteligência tática','Liderança','Posicionamento'];
 
-const RATING_TECHNICAL = ['Passe', 'Drible', 'Finalização', 'Cabeceio', 'Cruzamento', 'Domínio', 'Controle de bola'];
-const RATING_PHYSICAL  = ['Velocidade', 'Aceleração', 'Resistência', 'Força', 'Salto', 'Agilidade'];
-const RATING_MENTAL    = ['Visão de jogo', 'Inteligência tática', 'Liderança', 'Personalidade', 'Posicionamento', 'Comunicação'];
-
-let editingId = { player: null, report: null, comp: null };
-
-/* =================== TABS =================== */
-document.querySelectorAll('nav.tabs button').forEach(b => {
-  b.addEventListener('click', () => {
-    document.querySelectorAll('nav.tabs button').forEach(x => x.classList.remove('active'));
-    b.classList.add('active');
-    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-    document.getElementById('view-' + b.dataset.tab).classList.add('active');
-    refreshAll();
-  });
-});
-
-/* =================== MENU =================== */
-document.getElementById('btn-menu').addEventListener('click', e => {
-  e.stopPropagation();
-  document.getElementById('menu').classList.toggle('open');
-});
-document.addEventListener('click', () => document.getElementById('menu').classList.remove('open'));
-
-/* =================== MODALS =================== */
-function openModal(id) { document.getElementById(id).classList.add('open'); }
-function closeModal(id) { document.getElementById(id).classList.remove('open'); }
-
-/* =================== TOAST =================== */
-function toast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2200);
-}
-
-/* =================== PLAYERS =================== */
-function openPlayerModal(id = null) {
-  editingId.player = id;
-  document.getElementById('form-player').reset();
-  document.getElementById('player-id').value = '';
-  if (id) {
-    const p = load('players').find(x => x.id === id);
-    if (!p) return;
-    document.getElementById('player-modal-title').textContent = '✎ Editar Jogador';
-    document.getElementById('player-id').value = p.id;
-    document.getElementById('p-name').value = p.name || '';
-    document.getElementById('p-birth').value = p.birth || '';
-    document.getElementById('p-nationality').value = p.nationality || '';
-    document.getElementById('p-position').value = p.position || '';
-    document.getElementById('p-foot').value = p.foot || '';
-    document.getElementById('p-height').value = p.height || '';
-    document.getElementById('p-weight').value = p.weight || '';
-    document.getElementById('p-club').value = p.club || '';
-    document.getElementById('p-agent').value = p.agent || '';
-    document.getElementById('p-notes').value = p.notes || '';
-  } else {
-    document.getElementById('player-modal-title').textContent = '+ Novo Jogador';
-  }
-  openModal('modal-player');
-}
-
-function savePlayer() {
-  const name = document.getElementById('p-name').value.trim();
-  if (!name) { toast('Nome é obrigatório'); return; }
-  const players = load('players');
-  const data = {
-    id: editingId.player || uid(),
-    name,
-    birth: document.getElementById('p-birth').value,
-    nationality: document.getElementById('p-nationality').value.trim(),
-    position: document.getElementById('p-position').value,
-    foot: document.getElementById('p-foot').value,
-    height: document.getElementById('p-height').value,
-    weight: document.getElementById('p-weight').value,
-    club: document.getElementById('p-club').value.trim(),
-    agent: document.getElementById('p-agent').value.trim(),
-    notes: document.getElementById('p-notes').value.trim(),
-    createdAt: editingId.player ? players.find(x => x.id === editingId.player).createdAt : Date.now()
-  };
-  if (editingId.player) {
-    const idx = players.findIndex(x => x.id === editingId.player);
-    players[idx] = data;
-    toast('Jogador atualizado');
-  } else {
-    players.push(data);
-    toast('Jogador adicionado');
-  }
-  save('players', players);
-  closeModal('modal-player');
-  refreshAll();
-}
-
-function deletePlayer(id) {
-  if (!confirm('Excluir este jogador? (Os relatórios dele NÃO serão excluídos)')) return;
-  save('players', load('players').filter(p => p.id !== id));
-  toast('Jogador excluído');
-  refreshAll();
-}
-
-function calcAge(birth) {
-  if (!birth) return null;
-  const d = new Date(birth);
-  if (isNaN(d)) return null;
-  const t = new Date();
-  let a = t.getFullYear() - d.getFullYear();
-  const m = t.getMonth() - d.getMonth();
-  if (m < 0 || (m === 0 && t.getDate() < d.getDate())) a--;
-  return a;
-}
-
-function renderPlayers() {
-  const q = document.getElementById('search-players').value.toLowerCase();
-  let players = load('players');
-  if (q) players = players.filter(p =>
-    (p.name||'').toLowerCase().includes(q) ||
-    (p.club||'').toLowerCase().includes(q) ||
-    (p.position||'').toLowerCase().includes(q)
-  );
-  players.sort((a,b) => (a.name||'').localeCompare(b.name||''));
-
-  const el = document.getElementById('players-list');
-  document.getElementById('count-players').textContent = load('players').length;
-
-  if (!players.length) {
-    el.innerHTML = `<div class="empty"><div class="ico">👤</div><p>${q?'Nenhum jogador encontrado.':'Nenhum jogador cadastrado. Toque em "Adicionar" para começar.'}</p></div>`;
-    return;
-  }
-  el.innerHTML = players.map(p => {
-    const age = calcAge(p.birth);
-    return `
-    <div class="card" onclick="viewPlayer('${p.id}')">
-      <div class="card-row">
-        <div style="flex:1;min-width:0">
-          <div class="card-title">${escapeHtml(p.name)}</div>
-          <div class="card-sub">
-            ${p.position?escapeHtml(p.position):'Posição não informada'}
-            ${age!==null?` · ${age} anos`:''}
-            ${p.club?` · ${escapeHtml(p.club)}`:''}
-          </div>
-          ${p.foot?`<span class="badge badge-blue">${escapeHtml(p.foot)}</span>`:''}
-        </div>
-        <div class="card-actions" onclick="event.stopPropagation()">
-          <button class="mini-btn" onclick="openPlayerModal('${p.id}')" title="Editar">✎</button>
-          <button class="mini-btn del" onclick="deletePlayer('${p.id}')" title="Excluir">🗑</button>
-        </div>
-      </div>
-    </div>`;
-  }).join('');
-}
-
-function viewPlayer(id) {
-  const p = load('players').find(x => x.id === id);
-  if (!p) return;
-  const age = calcAge(p.birth);
-  const reports = load('reports').filter(r => r.playerId === id);
-  const html = `
-    <div class="detail-section">
-      <h3>Dados pessoais</h3>
-      <div class="detail-item"><span class="k">Nome</span><span class="v">${escapeHtml(p.name)}</span></div>
-      ${p.birth?`<div class="detail-item"><span class="k">Nascimento</span><span class="v">${formatDate(p.birth)}${age!==null?' ('+age+' anos)':''}</span></div>`:''}
-      ${p.nationality?`<div class="detail-item"><span class="k">Nacionalidade</span><span class="v">${escapeHtml(p.nationality)}</span></div>`:''}
-      ${p.position?`<div class="detail-item"><span class="k">Posição</span><span class="v">${escapeHtml(p.position)}</span></div>`:''}
-      ${p.foot?`<div class="detail-item"><span class="k">Pé preferido</span><span class="v">${escapeHtml(p.foot)}</span></div>`:''}
-      ${p.height?`<div class="detail-item"><span class="k">Altura</span><span class="v">${p.height} cm</span></div>`:''}
-      ${p.weight?`<div class="detail-item"><span class="k">Peso</span><span class="v">${p.weight} kg</span></div>`:''}
-      ${p.club?`<div class="detail-item"><span class="k">Clube atual</span><span class="v">${escapeHtml(p.club)}</span></div>`:''}
-      ${p.agent?`<div class="detail-item"><span class="k">Empresário</span><span class="v">${escapeHtml(p.agent)}</span></div>`:''}
-    </div>
-    ${p.notes?`<div class="detail-section"><h3>Observações</h3><div style="font-size:13px;line-height:1.6;white-space:pre-wrap">${escapeHtml(p.notes)}</div></div>`:''}
-    <div class="detail-section">
-      <h3>Relatórios deste jogador (${reports.length})</h3>
-      ${reports.length ? reports.map(r => `
-        <div class="card" style="margin-bottom:8px" onclick="closeModal('modal-player-view');viewReport('${r.id}')">
-          <div class="card-title">${formatDate(r.date)} · ${escapeHtml(r.opponent || 'Sem adversário')}</div>
-          <div class="card-sub">${escapeHtml(r.recommend || '')}</div>
-        </div>`).join('') : '<p style="color:var(--text-dim);font-size:13px">Nenhum relatório ainda.</p>'}
-    </div>
-  `;
-  document.getElementById('player-view-body').innerHTML = html;
-  document.getElementById('player-edit-btn').onclick = () => {
-    closeModal('modal-player-view');
-    openPlayerModal(id);
-  };
-  openModal('modal-player-view');
-}
-
-/* =================== REPORTS =================== */
-function buildRatingsUI(containerId, fields, values = {}) {
-  const c = document.getElementById(containerId);
-  c.innerHTML = fields.map(f => {
-    const v = values[f] || 0;
-    return `<div class="rating-row">
-      <span>${f}</span>
-      <div class="stars" data-field="${f}">
-        ${[1,2,3,4,5].map(i => `<span class="star ${i<=v?'on':''}" data-v="${i}">★</span>`).join('')}
-      </div>
-    </div>`;
-  }).join('');
-  c.querySelectorAll('.stars').forEach(g => {
-    g.addEventListener('click', e => {
-      if (!e.target.classList.contains('star')) return;
-      const v = +e.target.dataset.v;
-      g.querySelectorAll('.star').forEach(s => s.classList.toggle('on', +s.dataset.v <= v));
-      g.dataset.value = v;
+function seedCompetitions(year) {
+  const Y = year;
+  const d = (m, day) => Y + '-' + String(m).padStart(2,'0') + '-' + String(day).padStart(2,'0');
+  const list = [
+    { name:'Brasileirão Série A',   group:'brasil', subgroup:'profissional', start:d(4,1),  end:d(12,15) },
+    { name:'Brasileirão Série B',   group:'brasil', subgroup:'profissional', start:d(4,5),  end:d(11,30) },
+    { name:'Brasileirão Série C',   group:'brasil', subgroup:'profissional', start:d(4,15), end:d(10,30) },
+    { name:'Brasileirão Série D',   group:'brasil', subgroup:'profissional', start:d(4,20), end:d(9,30) },
+    { name:'Campeonato Gaúcho',     group:'brasil', subgroup:'profissional', start:d(1,15), end:d(4,15) },
+    { name:'Campeonato Gaúcho A2',  group:'brasil', subgroup:'profissional', start:d(1,15), end:d(4,15) },
+    { name:'Campeonato Catarinense',group:'brasil', subgroup:'profissional', start:d(1,15), end:d(4,15) },
+    { name:'Campeonato Paranaense', group:'brasil', subgroup:'profissional', start:d(1,15), end:d(4,15) },
+    { name:'Campeonato Carioca',    group:'brasil', subgroup:'profissional', start:d(1,18), end:d(4,8) },
+    { name:'Campeonato Paulista',   group:'brasil', subgroup:'profissional', start:d(1,18), end:d(4,8) },
+    { name:'Campeonato Mineiro',    group:'brasil', subgroup:'profissional', start:d(1,18), end:d(4,8) },
+    { name:'Campeonato Baiano',     group:'brasil', subgroup:'profissional', start:d(1,18), end:d(4,5) },
+    { name:'Campeonato Goiano',     group:'brasil', subgroup:'profissional', start:d(1,18), end:d(4,5) },
+    { name:'Copa Verde',            group:'brasil', subgroup:'profissional', start:d(2,15), end:d(5,30) },
+    { name:'Copa do Nordeste',      group:'brasil', subgroup:'profissional', start:d(2,1),  end:d(6,5) },
+    { name:'Copa do Brasil',        group:'brasil', subgroup:'profissional', start:d(2,20), end:d(11,12) },
+    { name:'Supercopa do Brasil',   group:'brasil', subgroup:'profissional', start:d(2,1),  end:d(2,28) },
+    { name:'Brasileirão U20 Série A', group:'brasil-base', subgroup:'sub-base', start:d(3,1),  end:d(10,30) },
+    { name:'Brasileirão U20 Série B', group:'brasil-base', subgroup:'sub-base', start:d(4,1),  end:d(10,15) },
+    { name:'Copa do Brasil U20',      group:'brasil-base', subgroup:'sub-base', start:d(2,15), end:d(9,30) },
+    { name:'Copa São Paulo U20',      group:'brasil-base', subgroup:'sub-base', start:d(1,2),  end:d(1,25) },
+    { name:'Brasileirão U17',         group:'brasil-base', subgroup:'sub-base', start:d(3,15), end:d(11,15) },
+    { name:'Libertadores',          group:'sul-pro', subgroup:'profissional', start:d(2,1),  end:d(11,30) },
+    { name:'Sul-Americana',         group:'sul-pro', subgroup:'profissional', start:d(3,1),  end:d(11,15) },
+    { name:'Recopa Sul-Americana',  group:'sul-pro', subgroup:'profissional', start:d(2,15), end:d(3,15) },
+    { name:'Libertadores U20',      group:'sul-base', subgroup:'sub-base', start:d(9,1),  end:d(10,15) },
+    { name:'Sul-Americano U20',     group:'sul-base', subgroup:'sub-base', start:d(1,20), end:d(2,15) },
+    { name:'Mundial de Clubes',     group:'mundo',  subgroup:'profissional', start:d(6,15), end:d(7,15) },
+    { name:'Copa do Mundo Sub-20',  group:'mundo',  subgroup:'sub-base',     start:d(9,15), end:d(10,15) }
+  ];
+  return list.map(function(c, i) {
+    return Object.assign({}, c, {
+      id: 'seed_' + i + '_' + Math.random().toString(36).slice(2,7),
+      scouts: ['','','','','']
     });
   });
 }
 
-function readRatings(containerId) {
-  const out = {};
-  document.querySelectorAll('#'+containerId+' .stars').forEach(g => {
-    const v = g.dataset.value !== undefined ? +g.dataset.value : g.querySelectorAll('.star.on').length;
-    out[g.dataset.field] = v;
-  });
-  return out;
-}
-
-function openReportModal(id = null) {
-  editingId.report = id;
-  document.getElementById('form-report').reset();
-  document.getElementById('report-id').value = '';
-
-  // Fill player select
-  const playerSel = document.getElementById('r-player');
-  const players = load('players');
-  playerSel.innerHTML = '<option value="">— Selecione —</option>' +
-    players.map(p => `<option value="${p.id}">${escapeHtml(p.name)}</option>`).join('');
-
-  // Fill comp select
-  const compSel = document.getElementById('r-comp');
-  const comps = load('comps');
-  compSel.innerHTML = '<option value="">—</option>' +
-    comps.map(c => `<option value="${c.id}">${escapeHtml(c.name)}</option>`).join('');
-
-  let values = { technical: {}, physical: {}, mental: {} };
-
-  if (id) {
-    const r = load('reports').find(x => x.id === id);
-    if (!r) return;
-    document.getElementById('report-modal-title').textContent = '✎ Editar Relatório';
-    document.getElementById('report-id').value = r.id;
-    playerSel.value = r.playerId || '';
-    document.getElementById('r-date').value = r.date || '';
-    compSel.value = r.compId || '';
-    document.getElementById('r-opponent').value = r.opponent || '';
-    document.getElementById('r-type').value = r.type || 'Ao vivo';
-    document.getElementById('r-scout').value = r.scout || '';
-    document.getElementById('r-recommend').value = r.recommend || 'Acompanhar';
-    document.getElementById('r-strengths').value = r.strengths || '';
-    document.getElementById('r-weak').value = r.weak || '';
-    document.getElementById('r-notes').value = r.notes || '';
-    values = r.ratings || values;
-  } else {
-    document.getElementById('report-modal-title').textContent = '📄 Novo Player Report';
-    document.getElementById('r-date').value = new Date().toISOString().split('T')[0];
-  }
-
-  buildRatingsUI('ratings-technical', RATING_TECHNICAL, values.technical || {});
-  buildRatingsUI('ratings-physical',  RATING_PHYSICAL,  values.physical  || {});
-  buildRatingsUI('ratings-mental',    RATING_MENTAL,    values.mental    || {});
-
-  openModal('modal-report');
-}
-
-function saveReport() {
-  const playerId = document.getElementById('r-player').value;
-  if (!playerId) { toast('Selecione um jogador'); return; }
-  const reports = load('reports');
-  const existing = editingId.report ? reports.find(x => x.id === editingId.report) : null;
-  const data = {
-    id: editingId.report || uid(),
-    playerId,
-    date: document.getElementById('r-date').value,
-    compId: document.getElementById('r-comp').value,
-    opponent: document.getElementById('r-opponent').value.trim(),
-    type: document.getElementById('r-type').value,
-    scout: document.getElementById('r-scout').value.trim(),
-    recommend: document.getElementById('r-recommend').value,
-    strengths: document.getElementById('r-strengths').value.trim(),
-    weak: document.getElementById('r-weak').value.trim(),
-    notes: document.getElementById('r-notes').value.trim(),
-    ratings: {
-      technical: readRatings('ratings-technical'),
-      physical:  readRatings('ratings-physical'),
-      mental:    readRatings('ratings-mental')
-    },
-    createdAt: existing ? existing.createdAt : Date.now(),
-    updatedAt: Date.now()
+const KEY = 'scoutsys_v2';
+function loadState() {
+  try {
+    const raw = localStorage.getItem(KEY);
+    if (raw) return JSON.parse(raw);
+  } catch(e) {}
+  const year = new Date().getFullYear();
+  return {
+    year: year,
+    scouts: SCOUTS_DEFAULT.slice(),
+    activeScouts: SCOUTS_DEFAULT.map(function(s){return s.id;}),
+    competitions: seedCompetitions(year),
+    reports: [],
+    shortlist: [],
+    indicados: []
   };
-  if (editingId.report) {
-    const idx = reports.findIndex(x => x.id === editingId.report);
-    reports[idx] = data;
-    toast('Relatório atualizado');
+}
+function saveState() {
+  localStorage.setItem(KEY, JSON.stringify(state));
+  flashAutosave();
+}
+
+let state = loadState();
+let editing = { comp: null, report: null, pickerTarget: null };
+
+function uid(){ return Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
+function escapeHtml(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+function fmtDate(s){ if(!s) return '—'; const d = new Date(s); return isNaN(d) ? s : d.toLocaleDateString('pt-BR'); }
+function toast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._h);
+  t._h = setTimeout(function(){ t.classList.remove('show'); }, 2000);
+}
+function flashAutosave(){
+  const el = document.getElementById('autosave-status');
+  if(!el) return;
+  el.textContent = '✓ Salvo';
+  el.style.color = '#2d8f5b';
+  clearTimeout(flashAutosave._h);
+  flashAutosave._h = setTimeout(function(){
+    el.textContent = 'Auto-salvo';
+    el.style.color = '';
+  }, 1200);
+}
+function openModal(id){ document.getElementById(id).classList.add('open'); }
+function closeModal(id){ document.getElementById(id).classList.remove('open'); }
+
+function periodToDayRange(periodIdx, year) {
+  const month = Math.floor(periodIdx / 3);
+  const sub = periodIdx % 3;
+  const firstDay = sub === 0 ? 1 : sub === 1 ? 11 : 21;
+  const start = new Date(year, month, firstDay);
+  let end;
+  if (sub < 2) {
+    end = new Date(year, month, firstDay + 9);
   } else {
-    reports.push(data);
-    toast('Relatório salvo');
+    end = new Date(year, month + 1, 0);
   }
-  save('reports', reports);
-  closeModal('modal-report');
-  refreshAll();
+  return { start: start, end: end };
+}
+function dateOverlap(s1, e1, s2, e2) {
+  return s1 <= e2 && s2 <= e1;
+}
+function parseDate(str) {
+  if (!str) return null;
+  const d = new Date(str + 'T00:00:00');
+  return isNaN(d) ? null : d;
 }
 
-function deleteReport(id) {
-  if (!confirm('Excluir este relatório?')) return;
-  save('reports', load('reports').filter(r => r.id !== id));
-  toast('Relatório excluído');
-  refreshAll();
-}
-
-function avgRatings(rs) {
-  const all = [...Object.values(rs.technical||{}), ...Object.values(rs.physical||{}), ...Object.values(rs.mental||{})];
-  if (!all.length) return 0;
-  return (all.reduce((s,x)=>s+x,0) / all.length).toFixed(1);
-}
-
-function renderReports() {
-  const q = (document.getElementById('search-reports')?.value || '').toLowerCase();
-  let reports = load('reports').slice().sort((a,b) => (b.createdAt||0) - (a.createdAt||0));
-  const players = load('players');
-  const comps = load('comps');
-  const playerName = id => (players.find(p => p.id === id)||{}).name || 'Jogador removido';
-  const compName = id => (comps.find(c => c.id === id)||{}).name || '';
-
-  if (q) reports = reports.filter(r =>
-    playerName(r.playerId).toLowerCase().includes(q) ||
-    (r.opponent||'').toLowerCase().includes(q) ||
-    (r.scout||'').toLowerCase().includes(q)
-  );
-
-  const el = document.getElementById('reports-list');
-  document.getElementById('count-reports').textContent = load('reports').length;
-
-  if (!reports.length) {
-    el.innerHTML = `<div class="empty"><div class="ico">📋</div><p>${q?'Nenhum relatório encontrado.':'Nenhum relatório ainda. Toque em "Novo" para criar.'}</p></div>`;
-    return;
-  }
-  el.innerHTML = reports.map(r => {
-    const avg = avgRatings(r.ratings || {});
-    const badgeClass = avg >= 4 ? 'badge-green' : avg >= 3 ? 'badge-yellow' : 'badge-purple';
-    return `
-    <div class="card" onclick="viewReport('${r.id}')">
-      <div class="card-row">
-        <div style="flex:1;min-width:0">
-          <div class="card-title">${escapeHtml(playerName(r.playerId))}</div>
-          <div class="card-sub">
-            ${formatDate(r.date)}
-            ${r.opponent?` · vs ${escapeHtml(r.opponent)}`:''}
-            ${compName(r.compId)?` · ${escapeHtml(compName(r.compId))}`:''}
-          </div>
-          <span class="badge ${badgeClass}">Nota ${avg} / 5</span>
-          ${r.recommend?`<span class="badge badge-blue">${escapeHtml(r.recommend)}</span>`:''}
-        </div>
-        <div class="card-actions" onclick="event.stopPropagation()">
-          <button class="mini-btn" onclick="openReportModal('${r.id}')" title="Editar">✎</button>
-          <button class="mini-btn del" onclick="deleteReport('${r.id}')" title="Excluir">🗑</button>
-        </div>
-      </div>
-    </div>`;
+function renderScoutChips() {
+  const c = document.getElementById('scout-chips');
+  c.innerHTML = state.scouts.map(function(s) {
+    const active = state.activeScouts.indexOf(s.id) >= 0;
+    return '<span class="scout-chip ' + (active ? '' : 'muted') + '" ' +
+           'style="background:' + s.color + '" ' +
+           'data-scout="' + s.id + '">' + escapeHtml(s.name) + '</span>';
   }).join('');
+  c.querySelectorAll('.scout-chip').forEach(function(el) {
+    el.addEventListener('click', function() {
+      const id = el.dataset.scout;
+      const i = state.activeScouts.indexOf(id);
+      if (i >= 0) state.activeScouts.splice(i, 1);
+      else state.activeScouts.push(id);
+      saveState();
+      renderScoutChips();
+      renderGantt();
+    });
+  });
 }
 
-function viewReport(id) {
-  const r = load('reports').find(x => x.id === id);
-  if (!r) return;
-  const player = load('players').find(p => p.id === r.playerId);
-  const comp = load('comps').find(c => c.id === r.compId);
-  const rs = r.ratings || {};
+function renderGantt() {
+  document.getElementById('year-label').textContent = state.year;
 
-  const renderGroup = (title, obj) => {
-    const keys = Object.keys(obj || {});
-    if (!keys.length) return '';
-    return `<div class="detail-section"><h3>${title}</h3>` +
-      keys.map(k => `<div class="detail-item"><span class="k">${escapeHtml(k)}</span><span class="v">${'★'.repeat(obj[k])}${'☆'.repeat(5-obj[k])}</span></div>`).join('') +
-      `</div>`;
-  };
+  const t = document.getElementById('gantt-table');
+  let head = '<thead><tr>' +
+    '<th rowspan="2" class="col-name freeze">Campeonato</th>' +
+    '<th rowspan="2" class="freeze" style="left:240px">📋</th>' +
+    '<th rowspan="2">Início</th>' +
+    '<th rowspan="2">Fim</th>' +
+    '<th rowspan="2">Scout 1</th>' +
+    '<th rowspan="2">Scout 2</th>' +
+    '<th rowspan="2">Scout 3</th>' +
+    '<th rowspan="2">Scout 4</th>' +
+    '<th rowspan="2">Scout 5</th>' +
+    MONTHS.map(function(m){return '<th colspan="3">' + m + '</th>';}).join('') +
+    '</tr><tr class="periods">' +
+    MONTHS.map(function(){return PERIOD_LABELS.map(function(p){return '<th>'+p+'</th>';}).join('');}).join('') +
+    '</tr></thead>';
 
-  document.getElementById('report-view-body').innerHTML = `
-    <div class="detail-section">
-      <h3>Identificação</h3>
-      <div class="detail-item"><span class="k">Jogador</span><span class="v">${escapeHtml(player?player.name:'—')}</span></div>
-      ${r.date?`<div class="detail-item"><span class="k">Data</span><span class="v">${formatDate(r.date)}</span></div>`:''}
-      ${comp?`<div class="detail-item"><span class="k">Competição</span><span class="v">${escapeHtml(comp.name)}</span></div>`:''}
-      ${r.opponent?`<div class="detail-item"><span class="k">Adversário</span><span class="v">${escapeHtml(r.opponent)}</span></div>`:''}
-      ${r.type?`<div class="detail-item"><span class="k">Tipo</span><span class="v">${escapeHtml(r.type)}</span></div>`:''}
-      ${r.scout?`<div class="detail-item"><span class="k">Scout</span><span class="v">${escapeHtml(r.scout)}</span></div>`:''}
-    </div>
-    ${renderGroup('Avaliação Técnica', rs.technical)}
-    ${renderGroup('Avaliação Física', rs.physical)}
-    ${renderGroup('Avaliação Mental / Tática', rs.mental)}
-    <div class="detail-section">
-      <h3>Parecer</h3>
-      ${r.recommend?`<div class="detail-item"><span class="k">Recomendação</span><span class="v">${escapeHtml(r.recommend)}</span></div>`:''}
-      ${r.strengths?`<div style="margin-top:10px"><strong style="font-size:12px;color:var(--green)">Pontos fortes:</strong><div style="font-size:13px;line-height:1.6;margin-top:4px;white-space:pre-wrap">${escapeHtml(r.strengths)}</div></div>`:''}
-      ${r.weak?`<div style="margin-top:10px"><strong style="font-size:12px;color:var(--red)">Pontos a melhorar:</strong><div style="font-size:13px;line-height:1.6;margin-top:4px;white-space:pre-wrap">${escapeHtml(r.weak)}</div></div>`:''}
-      ${r.notes?`<div style="margin-top:10px"><strong style="font-size:12px;color:var(--text-dim)">Observações:</strong><div style="font-size:13px;line-height:1.6;margin-top:4px;white-space:pre-wrap">${escapeHtml(r.notes)}</div></div>`:''}
-    </div>
-  `;
-  document.getElementById('report-edit-btn').onclick = () => {
-    closeModal('modal-report-view');
-    openReportModal(id);
-  };
-  openModal('modal-report-view');
+  const byGroup = {};
+  GROUPS.forEach(function(g) { byGroup[g.id] = { profissional: [], 'sub-base': [] }; });
+  state.competitions.forEach(function(c) {
+    if (!byGroup[c.group]) byGroup[c.group] = { profissional: [], 'sub-base': [] };
+    if (!byGroup[c.group][c.subgroup]) byGroup[c.group][c.subgroup] = [];
+    byGroup[c.group][c.subgroup].push(c);
+  });
+
+  let body = '<tbody>';
+  GROUPS.forEach(function(g) {
+    const sub = byGroup[g.id];
+    const total = (sub.profissional ? sub.profissional.length : 0) + (sub['sub-base'] ? sub['sub-base'].length : 0);
+    if (total === 0) return;
+    body += '<tr class="group-row ' + g.cls + '"><td colspan="' + (9 + TOTAL_PERIODS) + '">' + escapeHtml(g.label) + '</td></tr>';
+    ['profissional','sub-base'].forEach(function(sg) {
+      const items = sub[sg] || [];
+      if (!items.length) return;
+      body += '<tr class="subgroup-row"><td colspan="' + (9 + TOTAL_PERIODS) + '">' + SUBGROUPS[sg] + '</td></tr>';
+      items.sort(function(a,b){ return (a.start||'').localeCompare(b.start||''); });
+      items.forEach(function(c) { body += renderCompRow(c); });
+    });
+  });
+  body += '</tbody>';
+
+  t.innerHTML = head + body;
+
+  t.querySelectorAll('input[data-comp-field]').forEach(function(el) {
+    el.addEventListener('change', function() {
+      const c = state.competitions.find(function(x){ return x.id === el.dataset.id; });
+      if (!c) return;
+      c[el.dataset.compField] = el.value;
+      saveState();
+      renderGantt();
+    });
+  });
+  t.querySelectorAll('select[data-comp-scout]').forEach(function(el) {
+    el.addEventListener('change', function() {
+      const c = state.competitions.find(function(x){ return x.id === el.dataset.id; });
+      if (!c) return;
+      c.scouts[+el.dataset.compScout] = el.value;
+      saveState();
+      renderGantt();
+    });
+  });
+  t.querySelectorAll('td.col-name[data-id]').forEach(function(el) {
+    el.addEventListener('click', function(){ openCompModal(el.dataset.id); });
+  });
+  t.querySelectorAll('td.col-report[data-id]').forEach(function(el) {
+    el.addEventListener('click', function(){ openCompReports(el.dataset.id); });
+  });
 }
 
-/* =================== COMPETITIONS =================== */
-function openCompModal(id = null) {
-  editingId.comp = id;
+function renderCompRow(c) {
+  const compStart = parseDate(c.start);
+  const compEnd = parseDate(c.end);
+  const reports = state.reports.filter(function(r){ return r.compId === c.id; });
+  const hasReport = reports.length > 0;
+  const visibleScouts = c.scouts.filter(function(s){ return s && state.activeScouts.indexOf(s) >= 0; });
+
+  let cells = '';
+  for (let p = 0; p < TOTAL_PERIODS; p++) {
+    const range = periodToDayRange(p, state.year);
+    const overlaps = compStart && compEnd && dateOverlap(compStart, compEnd, range.start, range.end);
+    const monthEnd = (p % 3 === 2) ? 'month-end' : '';
+    if (!overlaps) {
+      cells += '<td class="period ' + monthEnd + '"></td>';
+      continue;
+    }
+    let bg = '#e8e8e2';
+    let label = '';
+    let cls = 'in-range empty';
+    if (visibleScouts.length === 0) {
+      bg = c.scouts.some(function(s){return s;}) ? '#f5f5f0' : '#f0efe9';
+      cls = 'in-range empty';
+    } else if (visibleScouts.length === 1) {
+      const s = state.scouts.find(function(x){ return x.id === visibleScouts[0]; });
+      bg = s ? s.color : '#ccc';
+      label = s ? s.initial : '';
+      cls = 'in-range';
+    } else {
+      bg = 'var(--sc-multi)';
+      label = visibleScouts.map(function(id){
+        const s = state.scouts.find(function(x){return x.id===id;});
+        return s ? s.initial : '';
+      }).join('');
+      cls = 'in-range multi';
+    }
+    cells += '<td class="period ' + cls + ' ' + monthEnd + '" style="background:' + bg + '">' + escapeHtml(label) + '</td>';
+  }
+
+  const scoutOpts = function(selected) {
+    return '<option value="">—</option>' +
+      state.scouts.map(function(s){
+        return '<option value="' + s.id + '"' + (selected === s.id ? ' selected' : '') + '>' + escapeHtml(s.name) + '</option>';
+      }).join('');
+  };
+
+  return '<tr class="comp-row">' +
+    '<td class="col-name freeze" data-id="' + c.id + '" title="Editar competição">' + escapeHtml(c.name) + '</td>' +
+    '<td class="col-report freeze ' + (hasReport ? 'has-report' : '') + '" data-id="' + c.id + '" style="left:240px" title="Relatórios (' + reports.length + ')">📋' + (reports.length ? '<sup style="font-size:9px">'+reports.length+'</sup>' : '') + '</td>' +
+    '<td class="col-date"><input type="date" value="' + (c.start||'') + '" data-id="' + c.id + '" data-comp-field="start"></td>' +
+    '<td class="col-date"><input type="date" value="' + (c.end||'') + '" data-id="' + c.id + '" data-comp-field="end"></td>' +
+    [0,1,2,3,4].map(function(i){
+      return '<td class="col-scout"><select data-id="' + c.id + '" data-comp-scout="' + i + '">' + scoutOpts(c.scouts[i]) + '</select></td>';
+    }).join('') +
+    cells +
+    '</tr>';
+}
+
+function openCompModal(id) {
+  editing.comp = id || null;
   document.getElementById('form-comp').reset();
-  document.getElementById('comp-id').value = '';
+  document.getElementById('comp-del-btn').style.display = id ? '' : 'none';
   if (id) {
-    const c = load('comps').find(x => x.id === id);
+    const c = state.competitions.find(function(x){ return x.id === id; });
     if (!c) return;
-    document.getElementById('comp-modal-title').textContent = '✎ Editar Competição';
-    document.getElementById('comp-id').value = c.id;
+    document.getElementById('comp-title').textContent = '✎ Editar Competição';
+    document.getElementById('c-id').value = c.id;
     document.getElementById('c-name').value = c.name || '';
-    document.getElementById('c-group').value = c.group || 'BRASIL';
-    document.getElementById('c-subgroup').value = c.subgroup || '';
+    document.getElementById('c-group').value = c.group || 'brasil';
+    document.getElementById('c-subgroup').value = c.subgroup || 'profissional';
     document.getElementById('c-start').value = c.start || '';
     document.getElementById('c-end').value = c.end || '';
-    document.getElementById('c-country').value = c.country || '';
-    document.getElementById('c-level').value = c.level || 'Profissional';
+    document.getElementById('c-country').value = c.country || 'Brasil';
   } else {
-    document.getElementById('comp-modal-title').textContent = '+ Nova Competição';
+    document.getElementById('comp-title').textContent = '+ Nova Competição';
   }
   openModal('modal-comp');
 }
 
 function saveComp() {
   const name = document.getElementById('c-name').value.trim();
-  if (!name) { toast('Nome é obrigatório'); return; }
   const start = document.getElementById('c-start').value;
   const end = document.getElementById('c-end').value;
-  if (!start || !end) { toast('Datas de início e fim obrigatórias'); return; }
+  if (!name) { toast('Nome obrigatório'); return; }
+  if (!start || !end) { toast('Datas obrigatórias'); return; }
 
-  const comps = load('comps');
-  const data = {
-    id: editingId.comp || uid(),
-    name,
-    group: document.getElementById('c-group').value,
-    subgroup: document.getElementById('c-subgroup').value.trim(),
-    start, end,
-    country: document.getElementById('c-country').value.trim(),
-    level: document.getElementById('c-level').value,
-    createdAt: editingId.comp ? comps.find(x => x.id === editingId.comp).createdAt : Date.now()
-  };
-  if (editingId.comp) {
-    const idx = comps.findIndex(x => x.id === editingId.comp);
-    comps[idx] = data;
+  if (editing.comp) {
+    const c = state.competitions.find(function(x){ return x.id === editing.comp; });
+    if (!c) return;
+    c.name = name;
+    c.group = document.getElementById('c-group').value;
+    c.subgroup = document.getElementById('c-subgroup').value;
+    c.start = start;
+    c.end = end;
+    c.country = document.getElementById('c-country').value.trim();
     toast('Competição atualizada');
   } else {
-    comps.push(data);
+    state.competitions.push({
+      id: uid(),
+      name: name, start: start, end: end,
+      group: document.getElementById('c-group').value,
+      subgroup: document.getElementById('c-subgroup').value,
+      country: document.getElementById('c-country').value.trim(),
+      scouts: ['','','','','']
+    });
     toast('Competição adicionada');
   }
-  save('comps', comps);
+  saveState();
   closeModal('modal-comp');
-  refreshAll();
+  renderGantt();
 }
 
-function deleteComp(id) {
-  if (!confirm('Excluir esta competição?')) return;
-  save('comps', load('comps').filter(c => c.id !== id));
-  toast('Competição excluída');
-  refreshAll();
+function deleteComp() {
+  if (!editing.comp) return;
+  if (!confirm('Excluir esta competição? Relatórios vinculados não serão excluídos.')) return;
+  state.competitions = state.competitions.filter(function(c){ return c.id !== editing.comp; });
+  saveState();
+  closeModal('modal-comp');
+  renderGantt();
+  toast('Excluída');
 }
 
-function renderComps() {
-  const q = (document.getElementById('search-comps')?.value || '').toLowerCase();
-  let comps = load('comps').slice().sort((a,b) => (a.start||'').localeCompare(b.start||''));
-  if (q) comps = comps.filter(c =>
-    (c.name||'').toLowerCase().includes(q) ||
-    (c.group||'').toLowerCase().includes(q) ||
-    (c.country||'').toLowerCase().includes(q)
-  );
-  const el = document.getElementById('comps-list');
-  document.getElementById('count-comps').textContent = load('comps').length;
-  if (!comps.length) {
-    el.innerHTML = `<div class="empty"><div class="ico">🏆</div><p>${q?'Nenhuma competição encontrada.':'Nenhuma competição cadastrada.'}</p></div>`;
-    return;
-  }
-  el.innerHTML = comps.map(c => `
-    <div class="card">
-      <div class="card-row">
-        <div style="flex:1;min-width:0">
-          <div class="card-title">${escapeHtml(c.name)}</div>
-          <div class="card-sub">
-            ${escapeHtml(c.group||'')}
-            ${c.subgroup?` · ${escapeHtml(c.subgroup)}`:''}
-            ${c.country?` · ${escapeHtml(c.country)}`:''}
-          </div>
-          <div class="card-sub" style="margin-top:4px">
-            ${formatDate(c.start)} → ${formatDate(c.end)}
-          </div>
-          <span class="badge ${c.level==='Profissional'?'badge-yellow':'badge-purple'}">${escapeHtml(c.level||'')}</span>
-        </div>
-        <div class="card-actions">
-          <button class="mini-btn" onclick="openCompModal('${c.id}')" title="Editar">✎</button>
-          <button class="mini-btn del" onclick="deleteComp('${c.id}')" title="Excluir">🗑</button>
-        </div>
-      </div>
-    </div>`).join('');
-}
-
-/* =================== HOME =================== */
-function renderHome() {
-  document.getElementById('stat-players').textContent = load('players').length;
-  document.getElementById('stat-reports').textContent = load('reports').length;
-  document.getElementById('stat-comps').textContent = load('comps').length;
-
-  const reports = load('reports').slice().sort((a,b)=>(b.createdAt||0)-(a.createdAt||0)).slice(0,5);
-  const players = load('players');
-  const playerName = id => (players.find(p => p.id === id)||{}).name || 'Jogador removido';
-  const el = document.getElementById('home-recent');
+function openCompReports(compId) {
+  const c = state.competitions.find(function(x){ return x.id === compId; });
+  if (!c) return;
+  const reports = state.reports.filter(function(r){ return r.compId === compId; });
+  document.getElementById('rc-title').textContent = '📋 ' + c.name;
+  const list = document.getElementById('rc-list');
   if (!reports.length) {
-    el.innerHTML = `<div class="empty"><div class="ico">📋</div><p>Nenhum relatório ainda.</p></div>`;
+    list.innerHTML = '<p style="color:var(--ink-dim);font-size:13px;padding:14px 0">Nenhum relatório ainda nesta competição.</p>';
+  } else {
+    list.innerHTML = reports.map(function(r) {
+      return '<div class="list-card" data-rid="' + r.id + '">' +
+        '<div><div class="title">' + escapeHtml(r.playerName) + '</div>' +
+        '<div class="sub">' + escapeHtml(r.position || '') + (r.age ? ' · '+r.age+' anos' : '') + ' · ' + fmtDate(r.date) + ' · ' + escapeHtml(r.recommendation || '') + '</div></div>' +
+        '<div style="font-size:18px">›</div></div>';
+    }).join('');
+    list.querySelectorAll('.list-card').forEach(function(el) {
+      el.addEventListener('click', function() {
+        closeModal('modal-reports-comp');
+        openReportModal(el.dataset.rid);
+      });
+    });
+  }
+  document.getElementById('rc-add').onclick = function() {
+    closeModal('modal-reports-comp');
+    openReportModal(null, compId);
+  };
+  openModal('modal-reports-comp');
+}
+
+function buildRatings(containerId, labels, values) {
+  values = values || {};
+  const c = document.getElementById(containerId);
+  c.innerHTML = labels.map(function(l) {
+    const v = values[l] || 0;
+    return '<div class="rating-row"><span>' + l + '</span>' +
+      '<span class="stars" data-key="' + l + '">' +
+      [1,2,3,4,5].map(function(i){ return '<span class="star ' + (i<=v?'on':'') + '" data-v="' + i + '">★</span>'; }).join('') +
+      '</span></div>';
+  }).join('');
+  c.querySelectorAll('.stars').forEach(function(g) {
+    g.addEventListener('click', function(e) {
+      if (!e.target.classList.contains('star')) return;
+      const v = +e.target.dataset.v;
+      g.querySelectorAll('.star').forEach(function(s){ s.classList.toggle('on', +s.dataset.v <= v); });
+      g.dataset.value = v;
+    });
+  });
+}
+function readRatings(containerId) {
+  const out = {};
+  document.querySelectorAll('#' + containerId + ' .stars').forEach(function(g) {
+    const v = g.dataset.value !== undefined ? +g.dataset.value : g.querySelectorAll('.star.on').length;
+    out[g.dataset.key] = v;
+  });
+  return out;
+}
+
+function openReportModal(reportId, preselectComp) {
+  editing.report = reportId || null;
+  const form = document.getElementById('form-report');
+  form.reset();
+  document.getElementById('report-del-btn').style.display = reportId ? '' : 'none';
+  const compSel = document.getElementById('r-comp');
+  compSel.innerHTML = '<option value="">—</option>' +
+    state.competitions.slice().sort(function(a,b){return a.name.localeCompare(b.name);})
+      .map(function(c){ return '<option value="' + c.id + '">' + escapeHtml(c.name) + '</option>'; }).join('');
+  const scoutSel = document.getElementById('r-scout');
+  scoutSel.innerHTML = '<option value="">—</option>' +
+    state.scouts.map(function(s){ return '<option value="' + s.id + '">' + escapeHtml(s.name) + '</option>'; }).join('');
+
+  let ratings = { tec:{}, fis:{}, men:{} };
+
+  if (reportId) {
+    const r = state.reports.find(function(x){ return x.id === reportId; });
+    if (!r) return;
+    document.getElementById('report-title').textContent = '✎ Editar Player Report';
+    document.getElementById('r-id').value = r.id;
+    document.getElementById('r-pname').value = r.playerName || '';
+    document.getElementById('r-pos').value = r.position || '';
+    document.getElementById('r-age').value = r.age || '';
+    document.getElementById('r-club').value = r.club || '';
+    document.getElementById('r-foot').value = r.foot || '';
+    compSel.value = r.compId || '';
+    document.getElementById('r-date').value = r.date || '';
+    document.getElementById('r-opp').value = r.opponent || '';
+    scoutSel.value = r.scoutId || '';
+    document.getElementById('r-reco').value = r.recommendation || 'Acompanhar';
+    document.getElementById('r-strong').value = r.strengths || '';
+    document.getElementById('r-weak').value = r.weak || '';
+    document.getElementById('r-notes').value = r.notes || '';
+    document.getElementById('r-shortlist').checked = state.shortlist.indexOf(r.playerKey) >= 0;
+    document.getElementById('r-indicados').checked = state.indicados.indexOf(r.playerKey) >= 0;
+    ratings = r.ratings || ratings;
+  } else {
+    document.getElementById('report-title').textContent = '📋 Novo Player Report';
+    document.getElementById('r-date').value = new Date().toISOString().split('T')[0];
+    if (preselectComp) compSel.value = preselectComp;
+  }
+  buildRatings('ratings-tec', RATING_TEC, ratings.tec || {});
+  buildRatings('ratings-fis', RATING_FIS, ratings.fis || {});
+  buildRatings('ratings-men', RATING_MEN, ratings.men || {});
+  openModal('modal-report');
+}
+
+function saveReport() {
+  const name = document.getElementById('r-pname').value.trim();
+  if (!name) { toast('Nome do jogador obrigatório'); return; }
+  const playerKey = name.toLowerCase().replace(/\s+/g, '_');
+  const data = {
+    id: editing.report || uid(),
+    playerName: name,
+    playerKey: playerKey,
+    position: document.getElementById('r-pos').value,
+    age: document.getElementById('r-age').value,
+    club: document.getElementById('r-club').value.trim(),
+    foot: document.getElementById('r-foot').value,
+    compId: document.getElementById('r-comp').value,
+    date: document.getElementById('r-date').value,
+    opponent: document.getElementById('r-opp').value.trim(),
+    scoutId: document.getElementById('r-scout').value,
+    recommendation: document.getElementById('r-reco').value,
+    strengths: document.getElementById('r-strong').value.trim(),
+    weak: document.getElementById('r-weak').value.trim(),
+    notes: document.getElementById('r-notes').value.trim(),
+    ratings: {
+      tec: readRatings('ratings-tec'),
+      fis: readRatings('ratings-fis'),
+      men: readRatings('ratings-men')
+    },
+    updatedAt: Date.now()
+  };
+  if (editing.report) {
+    const idx = state.reports.findIndex(function(r){ return r.id === editing.report; });
+    state.reports[idx] = Object.assign({}, state.reports[idx], data);
+    toast('Relatório atualizado');
+  } else {
+    data.createdAt = Date.now();
+    state.reports.push(data);
+    toast('Relatório salvo');
+  }
+  const toShort = document.getElementById('r-shortlist').checked;
+  const toInd = document.getElementById('r-indicados').checked;
+  if (toShort && state.shortlist.indexOf(playerKey) < 0) state.shortlist.push(playerKey);
+  if (!toShort) state.shortlist = state.shortlist.filter(function(k){ return k !== playerKey; });
+  if (toInd && state.indicados.indexOf(playerKey) < 0) state.indicados.push(playerKey);
+  if (!toInd) state.indicados = state.indicados.filter(function(k){ return k !== playerKey; });
+
+  saveState();
+  closeModal('modal-report');
+  renderGantt();
+  renderShortlist();
+  renderIndicados();
+}
+
+function deleteReport() {
+  if (!editing.report) return;
+  if (!confirm('Excluir este relatório?')) return;
+  state.reports = state.reports.filter(function(r){ return r.id !== editing.report; });
+  saveState();
+  closeModal('modal-report');
+  renderGantt();
+  toast('Relatório excluído');
+}
+
+function renderListView(target) {
+  const keys = state[target];
+  const reports = state.reports;
+  const el = document.getElementById(target + '-list');
+  if (!keys.length) {
+    el.innerHTML = '<p style="color:var(--ink-dim);padding:30px 0;text-align:center">Nenhum jogador no ' + (target==='shortlist'?'Shortlist':'Indicados') + '.</p>';
     return;
   }
-  el.innerHTML = reports.map(r => {
-    const avg = avgRatings(r.ratings||{});
-    return `
-    <div class="card" style="margin-bottom:8px" onclick="viewReport('${r.id}')">
-      <div class="card-title">${escapeHtml(playerName(r.playerId))}</div>
-      <div class="card-sub">${formatDate(r.date)} ${r.opponent?' · vs '+escapeHtml(r.opponent):''}</div>
-      <span class="badge ${avg>=4?'badge-green':avg>=3?'badge-yellow':'badge-purple'}">Nota ${avg} / 5</span>
-    </div>`;
+  el.innerHTML = keys.map(function(k) {
+    const reps = reports.filter(function(r){ return r.playerKey === k; });
+    const latest = reps.sort(function(a,b){ return (b.createdAt||0) - (a.createdAt||0); })[0];
+    const name = latest ? latest.playerName : k;
+    return '<div class="list-card" onclick="openLatestReport(\'' + k + '\')">' +
+      '<div><div class="title">' + escapeHtml(name) + '</div>' +
+      '<div class="sub">' + (latest ? escapeHtml(latest.position||'') + ' · ' + escapeHtml(latest.club||'') + ' · ' + reps.length + ' relatório(s)' : 'Sem relatórios ainda') + '</div></div>' +
+      '<button class="btn btn-danger" onclick="event.stopPropagation();removeFromList(\'' + target + '\',\'' + k + '\')">Remover</button></div>';
   }).join('');
 }
-
-/* =================== UTILS =================== */
-function escapeHtml(s) {
-  return String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function renderShortlist(){ renderListView('shortlist'); }
+function renderIndicados(){ renderListView('indicados'); }
+function removeFromList(target, key) {
+  state[target] = state[target].filter(function(k){ return k !== key; });
+  saveState();
+  renderShortlist(); renderIndicados();
 }
-function formatDate(d) {
-  if (!d) return '—';
-  const dt = new Date(d);
-  if (isNaN(dt)) return d;
-  return dt.toLocaleDateString('pt-BR');
+function openLatestReport(playerKey) {
+  const reps = state.reports.filter(function(r){ return r.playerKey === playerKey; })
+    .sort(function(a,b){ return (b.createdAt||0) - (a.createdAt||0); });
+  if (reps[0]) openReportModal(reps[0].id);
+  else toast('Sem relatórios para este jogador');
 }
 
-/* =================== IMPORT / EXPORT =================== */
+function openPlayerPicker(target) {
+  editing.pickerTarget = target;
+  document.getElementById('pk-title').textContent = 'Adicionar ao ' + (target==='shortlist' ? 'Shortlist' : 'Indicados');
+  document.getElementById('pk-search').value = '';
+  renderPicker('');
+  openModal('modal-picker');
+}
+function renderPicker(q) {
+  const seen = {};
+  const players = [];
+  state.reports.forEach(function(r) {
+    if (!seen[r.playerKey]) {
+      seen[r.playerKey] = true;
+      players.push({ key: r.playerKey, name: r.playerName, position: r.position, club: r.club });
+    }
+  });
+  const filtered = q ? players.filter(function(p){ return p.name.toLowerCase().indexOf(q.toLowerCase()) >= 0; }) : players;
+  const el = document.getElementById('pk-list');
+  if (!filtered.length) {
+    el.innerHTML = '<p style="color:var(--ink-dim);padding:14px;text-align:center">Nenhum jogador. Crie um Player Report primeiro.</p>';
+    return;
+  }
+  el.innerHTML = filtered.map(function(p) {
+    return '<div class="list-card" onclick="pickPlayer(\'' + p.key + '\')">' +
+      '<div><div class="title">' + escapeHtml(p.name) + '</div>' +
+      '<div class="sub">' + escapeHtml(p.position||'') + (p.club ? ' · ' + escapeHtml(p.club) : '') + '</div></div><div>+</div></div>';
+  }).join('');
+}
+function pickPlayer(key) {
+  const t = editing.pickerTarget;
+  if (state[t].indexOf(key) < 0) state[t].push(key);
+  saveState();
+  closeModal('modal-picker');
+  renderShortlist(); renderIndicados();
+  toast('Adicionado');
+}
+document.getElementById('pk-search').addEventListener('input', function(e){ renderPicker(e.target.value); });
+
+document.querySelectorAll('.topbar .tb-btn[data-view]').forEach(function(b) {
+  b.addEventListener('click', function() {
+    document.querySelectorAll('.topbar .tb-btn[data-view]').forEach(function(x){ x.classList.remove('active'); });
+    b.classList.add('active');
+    const v = b.dataset.view;
+    document.getElementById('view-calendar').style.display = v === 'calendar' ? '' : 'none';
+    document.getElementById('view-shortlist').classList.toggle('active', v === 'shortlist');
+    document.getElementById('view-indicados').classList.toggle('active', v === 'indicados');
+    if (v === 'shortlist') renderShortlist();
+    if (v === 'indicados') renderIndicados();
+  });
+});
+
+function changeYear(delta) {
+  state.year += delta;
+  saveState();
+  renderGantt();
+}
+
 function exportData() {
-  const data = {
-    exportedAt: new Date().toISOString(),
-    version: 1,
-    players: load('players'),
-    reports: load('reports'),
-    comps: load('comps')
-  };
-  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const data = JSON.stringify(state, null, 2);
+  const blob = new Blob([data], { type:'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = `scout-system-backup-${new Date().toISOString().split('T')[0]}.json`;
+  a.download = 'scout-system-' + state.year + '-' + new Date().toISOString().split('T')[0] + '.json';
   a.click();
   URL.revokeObjectURL(url);
-  toast('Dados exportados');
+  toast('Exportado');
 }
-
 function importData(ev) {
-  const file = ev.target.files[0];
-  if (!file) return;
+  const f = ev.target.files[0];
+  if (!f) return;
   const reader = new FileReader();
-  reader.onload = e => {
+  reader.onload = function(e) {
     try {
       const data = JSON.parse(e.target.result);
-      if (!data.players && !data.reports && !data.comps) throw new Error();
+      if (!data.competitions) throw new Error();
       if (!confirm('Isso substituirá todos os dados atuais. Continuar?')) return;
-      save('players', data.players || []);
-      save('reports', data.reports || []);
-      save('comps',   data.comps   || []);
-      toast('Dados importados');
-      refreshAll();
-    } catch {
+      state = Object.assign({
+        year: new Date().getFullYear(),
+        scouts: SCOUTS_DEFAULT.slice(),
+        activeScouts: SCOUTS_DEFAULT.map(function(s){return s.id;}),
+        competitions: [],
+        reports: [],
+        shortlist: [],
+        indicados: []
+      }, data);
+      saveState();
+      renderScoutChips();
+      renderGantt();
+      renderShortlist();
+      renderIndicados();
+      toast('Importado');
+    } catch(err) {
       toast('Arquivo inválido');
     }
   };
-  reader.readAsText(file);
+  reader.readAsText(f);
   ev.target.value = '';
 }
 
-function clearAll() {
-  if (!confirm('Apagar TODOS os dados? Esta ação não pode ser desfeita.')) return;
-  if (!confirm('Tem certeza absoluta?')) return;
-  Object.values(STORE).forEach(k => localStorage.removeItem(k));
-  toast('Tudo apagado');
-  refreshAll();
-}
-
-/* =================== REFRESH =================== */
-function refreshAll() {
-  renderHome();
-  renderPlayers();
-  renderReports();
-  renderComps();
-}
-
-refreshAll();
+renderScoutChips();
+renderGantt();
+renderShortlist();
+renderIndicados();
 </script>
 </body>
 </html>
